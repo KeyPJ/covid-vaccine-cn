@@ -84,14 +84,18 @@ function App() {
         series: [
             {
                 name: '累计剂次',
-                type: 'bar',
-                data: data.ySumData
+                type: 'line',
+                data: data.ySumData,
+                color: ['#4682B4'],
+                smooth: true,
             },
             {
                 name: '每日增量',
                 type: 'line',
                 yAxisIndex: 1,
-                data: data.yIncrementData
+                data: data.yIncrementData,
+                color: ['#D2691E'],
+                smooth: true,
             }
         ]
     };
