@@ -17,7 +17,7 @@ let scrape = async () => {
     await page.waitForSelector(".zxxx_list>li");
 
     const days = await page.evaluate(() => {
-        return [].slice.call(document.querySelectorAll(".zxxx_list>li")).map(
+        return [].slice.call(document.querySelectorAll(".zxxx_list>li")).slice(0,3).map(
             li => {
                 // return li.innerText
                 let href = li.children[0].href;
@@ -57,11 +57,11 @@ scrape().then((value) => {
     let filePath = path.join(__dirname, '../../public/data.json');
     let list = JSON.parse(fs.readFileSync(filePath, "utf8")) || [];
     let dates = list.map(day => day.date) || [];
+    console.log(value);
     list = list.concat(value.filter(day => {
         return !dates.includes(day.date)
     }))
     list.sort((a, b) => a.count - b.count)
-    console.log(list); // Success!
     fs.writeFileSync(filePath, JSON.stringify(list))
 }).catch(
     // err => console.error(err)
