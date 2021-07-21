@@ -8,7 +8,7 @@ on:
   push:
     branches: [ master ]
   schedule:
-    - cron: '0 15 * * *'
+    - cron: '0 7 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,8 +36,7 @@ jobs:
         uses: EndBug/add-and-commit@v7
         with:  
           add : 'public/data.json'
-          author_name: KeyPJ
-          author_email: pengjian1994@gmail.com
+          default_author: github_actions
           message: 'update data.json'
 
       - name: Deploy master to GitHub Pages
