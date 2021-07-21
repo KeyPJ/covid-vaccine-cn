@@ -47,7 +47,7 @@ function App() {
             }
         },
         legend: {
-            data: ['累计剂次', '每日增量'],
+            data: ['累计剂次(万)', '每日增量(万)'],
             top: "20%"
         },
         xAxis: [
@@ -62,22 +62,22 @@ function App() {
         yAxis: [
             {
                 type: 'value',
-                name: '累计剂次',
+                name: '累计剂次(万)',
                 min: 0,
                 max: data.ySumMax,
                 interval: ySumInterval,
                 axisLabel: {
-                    formatter: '{value} 万'
+                    formatter: '{value}'
                 }
             },
             {
                 type: 'value',
-                name: '每日增量',
+                name: '每日增量(万)',
                 min: 0,
                 max: data.yIncrementMax,
                 interval: yIncrementInterval,
                 axisLabel: {
-                    formatter: '{value} 万'
+                    formatter: '{value}'
                 }
             }
         ],
@@ -88,6 +88,11 @@ function App() {
                 data: data.ySumData,
                 color: ['#4682B4'],
                 smooth: true,
+                markPoint:{
+                    data:[
+                        {name:"最大值",type:"max"}
+                    ]
+                },
             },
             {
                 name: '每日增量',
@@ -96,6 +101,18 @@ function App() {
                 data: data.yIncrementData,
                 color: ['#D2691E'],
                 smooth: true,
+                markPoint:{
+                    data:[
+                        {name:"最大值",type:"max"}
+                    ]
+                },
+            }
+        ],
+        dataZoom: [
+            {
+                type: 'slider',
+                start: 0,
+                end: 100,
             }
         ]
     };
@@ -131,11 +148,11 @@ function App() {
     const winSize = useWinSize();
     const {width, height} = winSize;
 
-    function dblclick(params: any) {
+    const dblclick = (params: any) => {
         const {dataIndex} = params;
         const url = data.urls[dataIndex];
         window.open(url, "_blank")
-    }
+    };
 
     const onEvents = {
         'dblclick': dblclick
