@@ -33,7 +33,7 @@ let scrape = async () => {
     const list = []
     for await (let day of days) {
         const {href} = day;
-        page.goto(href)
+        await page.goto(href)
         await page.waitForSelector("#xw_box");
         const dayNew = await page.evaluate(() => {
             let original = document.querySelector("#xw_box").innerText.replaceAll("\n","")
@@ -49,7 +49,7 @@ let scrape = async () => {
         });
     }
 
-    browser.close();
+    await browser.close();
     return list;
 };
 
