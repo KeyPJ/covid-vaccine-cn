@@ -119,7 +119,7 @@ function App() {
 
 
     useEffect(() => {
-        fetch('data.json').then(
+        fetch('data.json?'+new Date().getTime()).then(
             res => {
                 res.json().then(
                     (json: DayData[]) => {
