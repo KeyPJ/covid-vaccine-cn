@@ -37,7 +37,7 @@ let scrape = async () => {
         await page.waitForSelector("#xw_box");
         const dayNew = await page.evaluate(() => {
             let original = document.querySelector("#xw_box").innerText.replaceAll("\n","")
-            let match = original.match(/((\d+(\.\d+)?)万)/);
+            let match = original.match(/((\d+(\.\d+)?)(\s)*万)/);
             const count = match ? match[2] : 0;
             return {
                 count,
